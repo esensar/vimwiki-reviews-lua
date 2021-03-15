@@ -23,6 +23,11 @@ local function get_reviews_dir(vimwiki_index)
 	return vimwiki.path .. 'reviews/'
 end
 
+-- Converts days to seconds
+local function days_to_seconds(days)
+	return days * 24 * 60 * 60
+end
+
 -- Finds review template path for provided review type
 local function get_review_template_path(vimwiki_reviews_path, review_type)
 	return vimwiki_reviews_path .. 'template-' .. review_type .. '.md'
@@ -94,10 +99,10 @@ end
 -- Open current week weekly review file
 -- Created buffer is dated to Sunday of current week
 -- Opens current week because Sunday is good time to do this review
-function M.vimwiki_weekly_review(vimwiki_index)
+function M.open_vimwiki_weekly_review(vimwiki_index, offset)
 	local reviews_dir = get_reviews_dir(vimwiki_index)
 	local days_to_sunday = 7 - tonumber(os.date('%u'))
-	local week_date = os.date('%Y-%m-%d', os.time() + days_to_sunday * 24 * 60 * 60)
+	local week_date = os.date('%Y-%m-%d', os.time() + days_to_seconds(days_to_sunday + 7 * offset))
 	local file_name = reviews_dir .. week_date .. '-week.md'
 	local exists = file_exists_or_open(file_name)
 	vim.cmd('edit ' .. file_name)
@@ -113,9 +118,19 @@ end
 -- Created buffer is dated to previous month
 -- Previous month is calculated in an erroneous way
 -- 28 days are subtracted from current time to get previous month
-function M.vimwiki_monthly_review(vimwiki_index)
+function M.open_vimwiki_monthly_review(vimwiki_index, offset)
 	local reviews_dir = get_reviews_dir(vimwiki_index)
-	local month_time = os.time() - 28 * 24 * 60 * 60
+	local time = os.time()
+
+	local year = tonumber(os.date('%Y', time))
+	local month = tonumber(os.date('%m', time))
+
+	local month_time = os.time {
+		year = year,  
+		-- os.time automatically handles overflows
+		month = month + offset,
+		day = tonumber(os.date('%d', time))
+	}
 	local month_date = os.date('%Y-%m', month_time)
 	local file_name = reviews_dir .. month_date .. '-month.md'
 	local exists = file_exists_or_open(file_name)
@@ -129,9 +144,9 @@ end
 
 -- Open past year yearly review file
 -- Created buffer is dated to previous year
-function M.vimwiki_yearly_review(vimwiki_index)
+function M.open_vimwiki_yearly_review(vimwiki_index, offset)
 	local reviews_dir = get_reviews_dir(vimwiki_index)
-	local year_date = (tonumber(os.date('%Y')) - 1)
+	local year_date = (tonumber(os.date('%Y')) + offset)
 	local file_name = reviews_dir .. year_date .. '-year.md'
 	local exists = file_exists_or_open(file_name)
 	vim.cmd('edit ' .. file_name)
@@ -214,7 +229,7 @@ function M.get_review_index(vimwiki_index)
 end
 
 -- Open reviews index file
-function M.vimwiki_review_index(vimwiki_index)
+function M.open_vimwiki_review_index(vimwiki_index)
 	local reviews_dir = get_reviews_dir(vimwiki_index)
 	vim.cmd('edit ' .. reviews_dir .. 'reviews.md')
 
@@ -223,21 +238,6 @@ function M.vimwiki_review_index(vimwiki_index)
 	local lines = {
 		'# Reviews',
 		'',
-	}
-
-	local month_names = {
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December'
 	}
 
 	-- Sort index by year
@@ -268,7 +268,13 @@ function M.vimwiki_review_index(vimwiki_index)
 
 		-- Add months
 		for _, month in pairs(months) do
-			table.insert(lines, '### ' .. month_names[tonumber(month)])
+			local month_time = os.time {
+				year = tonumber(year),
+				month = tonumber(month),
+				day = 1
+			}
+			local month_name = os.date('%B', month_time)
+			table.insert(lines, '### ' .. month_name)
 			table.insert(lines, '')
 			if (index[year].months[month].month)
 				then
