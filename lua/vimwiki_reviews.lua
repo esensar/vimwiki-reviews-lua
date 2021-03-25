@@ -251,13 +251,41 @@ function M.open_vimwiki_review_index(vimwiki_index)
 		return count
 	end
 
+	local vimwiki_syntax = vim.g.vimwiki_wikilocal_vars[vimwiki_index]['syntax']
+
+	local h2_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH2_Template', vimwiki_syntax)
+	local h3_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH3_Template', vimwiki_syntax)
+	local link_template = vim.fn['vimwiki#vars#get_syntaxlocal']('Weblink1Template', vimwiki_syntax)
+	local bullet = vim.fn['vimwiki#lst#default_symbol']() .. ' '
+	local margin = vim.fn['vimwiki#lst#get_list_margin']()
+	local link_margin = string.rep(' ', margin)
+
+	local function header2(header)
+		result = h2_template:gsub('__Header__', header)
+		return result
+	end
+
+	local function header3(header)
+		result = h3_template:gsub('__Header__', header)
+		return result
+	end
+
+	local function wiki_link(link, desc)
+		result = link_template:gsub('__LinkUrl__', link):gsub('__LinkDescription__', desc)
+		return result
+	end
+
+	local function wiki_list_link(link, desc)
+		return link_margin .. bullet .. wiki_link(link, desc)
+	end
+
 	-- Add years
 	for _, year in pairs(years) do
-		table.insert(lines, '## ' .. year)
+		table.insert(lines, header2(year))
 		table.insert(lines, '')
 		if (index[year].year)
 			then
-			table.insert(lines, '- [Yearly review](' .. index[year].year .. ')')
+			table.insert(lines, wiki_list_link(index[year].year, 'Yearly review'))
 			table.insert(lines, '')
 		end
 
@@ -274,11 +302,11 @@ function M.open_vimwiki_review_index(vimwiki_index)
 				day = 1
 			}
 			local month_name = os.date('%B', month_time)
-			table.insert(lines, '### ' .. month_name)
+			table.insert(lines, header3(month_name))
 			table.insert(lines, '')
 			if (index[year].months[month].month)
 				then
-				table.insert(lines, '- [Monthly review](' .. index[year].months[month].month .. ')')
+				table.insert(lines, wiki_list_link(index[year].months[month].month, 'Monthly review'))
 			end
 
 			-- Sort weeks
@@ -290,7 +318,7 @@ function M.open_vimwiki_review_index(vimwiki_index)
 			-- Add weeks
 			local count = tablelength(sorted)
 			for _, week in pairs(sorted) do
-				table.insert(lines, '- [Week #' .. count .. ' Review](' .. weeks[week] .. ')')
+				table.insert(lines, wiki_list_link(weeks[week], 'Week #' .. count .. ' Review'))
 				count = count - 1
 			end
 
