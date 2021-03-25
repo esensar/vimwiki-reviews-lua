@@ -251,7 +251,7 @@ function M.open_vimwiki_review_index(vimwiki_index)
 		return count
 	end
 
-	local vimwiki_syntax = vim.g.vimwiki_wikilocal_vars[vimwiki_index]['syntax']
+	local vimwiki_syntax = vim.g.vimwiki_wikilocal_vars[vimwiki_index - 1]['syntax']
 
 	local h2_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH2_Template', vimwiki_syntax)
 	local h3_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH3_Template', vimwiki_syntax)
