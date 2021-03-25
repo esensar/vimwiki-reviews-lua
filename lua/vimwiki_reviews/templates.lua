@@ -25,7 +25,7 @@ function M.for_syntax(syntax)
 
 	-- Returns string representing link with passed link and text in correct syntax
 	function syntaxed.link(link, text)
-		local template = api.get_vimwiki_syntaxlocal('WikiLinkTemplate2', syntax)
+		local template = vim.fn['vimwiki#vars#get_global']('WikiLinkTemplate2')
 		if syntax == 'markdown'
 			then
 			template = api.get_vimwiki_syntaxlocal('Weblink1Template', syntax)
@@ -40,7 +40,7 @@ function M.for_syntax(syntax)
 		local margin = vim.fn['vimwiki#lst#get_list_margin']()
 		local item_margin = string.rep(' ', margin)
 
-		return margin .. bullet .. text
+		return item_margin .. bullet .. text
 	end
 
 	return syntaxed
