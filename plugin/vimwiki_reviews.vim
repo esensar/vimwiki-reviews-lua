@@ -26,16 +26,16 @@ command! -count=0 VimwikiReviewIndex :lua require('vimwiki_reviews').open_vimwik
 nnoremap <Plug>VimwikiWeeklyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_weekly_review(vim.v.count, 0)<CR>
 nnoremap <Plug>VimwikiNextWeeklyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_weekly_review(vim.v.count, 1)<CR>
 nnoremap <Plug>VimwikiPrevWeeklyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_weekly_review(vim.v.count, -1)<CR>
-nnoremap <Plug>VimwikiWeeklyTemplate <Cmd>lua require('vimwiki_reviews').open_review_weekly_template(vim.v.count)
-nnoremap <Plug>VimwikiMonthlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_monthly_review(vim.v.count, 0)
-nnoremap <Plug>VimwikiNextMonthlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_monthly_review(vim.v.count, 1)
+nnoremap <Plug>VimwikiWeeklyTemplate <Cmd>lua require('vimwiki_reviews').open_review_weekly_template(vim.v.count)<CR>
+nnoremap <Plug>VimwikiMonthlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_monthly_review(vim.v.count, 0)<CR>
+nnoremap <Plug>VimwikiNextMonthlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_monthly_review(vim.v.count, 1)<CR>
 nnoremap <Plug>VimwikiPrevMonthlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_monthly_review(vim.v.count, -1)
-nnoremap <Plug>VimwikiMonthlyTemplate <Cmd>lua require('vimwiki_reviews').open_review_monthly_template(vim.v.count)
-nnoremap <Plug>VimwikiYearlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_yearly_review(vim.v.count, 0)
-nnoremap <Plug>VimwikiNextYearlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_yearly_review(vim.v.count, 1)
-nnoremap <Plug>VimwikiPrevYearlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_yearly_review(vim.v.count, -1)
-nnoremap <Plug>VimwikiYearlyTemplate <Cmd>lua require('vimwiki_reviews').open_review_yearly_template(vim.v.count)
-nnoremap <Plug>VimwikiReviewIndex <Cmd>lua require('vimwiki_reviews').open_vimwiki_review_index(vim.v.count)
+nnoremap <Plug>VimwikiMonthlyTemplate <Cmd>lua require('vimwiki_reviews').open_review_monthly_template(vim.v.count)<CR>
+nnoremap <Plug>VimwikiYearlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_yearly_review(vim.v.count, 0)<CR>
+nnoremap <Plug>VimwikiNextYearlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_yearly_review(vim.v.count, 1)<CR>
+nnoremap <Plug>VimwikiPrevYearlyReview <Cmd>lua require('vimwiki_reviews').open_vimwiki_yearly_review(vim.v.count, -1)<CR>
+nnoremap <Plug>VimwikiYearlyTemplate <Cmd>lua require('vimwiki_reviews').open_review_yearly_template(vim.v.count)<CR>
+nnoremap <Plug>VimwikiReviewIndex <Cmd>lua require('vimwiki_reviews').open_vimwiki_review_index(vim.v.count)<CR>
 
 
 if !exists('g:vimwiki_reviews_disable_maps') || !g:vimwiki_reviews_disable_maps
