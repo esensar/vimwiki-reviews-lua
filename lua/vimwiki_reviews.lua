@@ -5,9 +5,13 @@
 local Path = require('plenary.path')
 local scandir = require('plenary.scandir')
 
--- Gets path to reviews dir of provided vimwiki (by index)
-local function get_reviews_dir(vimwiki_index)
-	local vimwiki = {}
+-- Normalizes passed vimwiki index
+-- This is meant to be used on user input index where:
+-- 0 = default vimwiki
+-- 1 = first vimwiki
+-- 2 = second vimwiki
+-- etc..
+local function normalize_vimwiki_index(vimwiki_index)
 	if (vimwiki_index == 0)
 		then
 		local current_index = vim.fn['vimwiki#vars#get_bufferlocal']('wiki_nr')
@@ -15,10 +19,18 @@ local function get_reviews_dir(vimwiki_index)
 			then
 			current_index = 0
 		end
-		vimwiki = vim.g.vimwiki_list[current_index + 1]
+		return current_index + 1
 	else
-		vimwiki = vim.g.vimwiki_list[vimwiki_index]
+		return vimwiki_index
 	end
+end
+
+-- Gets path to reviews dir of provided vimwiki (by index)
+local function get_reviews_dir(vimwiki_index)
+	local vimwiki = {}
+
+	vimwiki_index = normalize_vimwiki_index(vimwiki_index)
+	vimwiki = vim.g.vimwiki_list[vimwiki_index]
 
 	return vimwiki.path .. 'reviews/'
 end
@@ -251,7 +263,7 @@ function M.open_vimwiki_review_index(vimwiki_index)
 		return count
 	end
 
-	local vimwiki_syntax = vim.g.vimwiki_wikilocal_vars[vimwiki_index - 1]['syntax']
+	local vimwiki_syntax = vim.g.vimwiki_wikilocal_vars[normalize_vimwiki_index(vimwiki_index)]['syntax']
 
 	local h2_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH2_Template', vimwiki_syntax)
 	local h3_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH3_Template', vimwiki_syntax)
