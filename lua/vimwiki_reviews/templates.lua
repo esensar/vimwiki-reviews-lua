@@ -8,7 +8,7 @@ local M = {}
 -- Returns an object with template functions 
 -- matching syntax of vimwiki with passed index
 function M.for_vimwiki(vimwiki_index) 
-	syntax = api.get_vimwiki_syntax(vimwiki_index)
+	local syntax = api.get_vimwiki_syntax(vimwiki_index)
 	return M.for_syntax(syntax)
 end
 
