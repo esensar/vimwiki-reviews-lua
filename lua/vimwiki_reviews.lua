@@ -267,23 +267,30 @@ function M.open_vimwiki_review_index(vimwiki_index)
 
 	local h2_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH2_Template', vimwiki_syntax)
 	local h3_template = vim.fn['vimwiki#vars#get_syntaxlocal']('rxH3_Template', vimwiki_syntax)
-	local link_template = vim.fn['vimwiki#vars#get_syntaxlocal']('Weblink1Template', vimwiki_syntax)
+
+	local link_template = vim.fn['vimwiki#vars#get_global']('WikiLinkTemplate2')
+
+	if vimwiki_syntax == 'markdown'
+		then
+		link_template = vim.fn['vimwiki#vars#get_syntaxlocal']('Weblink1Template', vimwiki_syntax)
+	end
+
 	local bullet = vim.fn['vimwiki#lst#default_symbol']() .. ' '
 	local margin = vim.fn['vimwiki#lst#get_list_margin']()
 	local link_margin = string.rep(' ', margin)
 
 	local function header2(header)
-		result = h2_template:gsub('__Header__', header)
+		local result = h2_template:gsub('__Header__', header)
 		return result
 	end
 
 	local function header3(header)
-		result = h3_template:gsub('__Header__', header)
+		local result = h3_template:gsub('__Header__', header)
 		return result
 	end
 
 	local function wiki_link(link, desc)
-		result = link_template:gsub('__LinkUrl__', link):gsub('__LinkDescription__', desc)
+		local result = link_template:gsub('__LinkUrl__', link):gsub('__LinkDescription__', desc)
 		return result
 	end
 
@@ -342,5 +349,7 @@ function M.open_vimwiki_review_index(vimwiki_index)
 	vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})  -- Clear out
 	vim.api.nvim_buf_set_lines(buf, 0, 0, false, lines)  -- Put new contents
 end
+
+M.open_vimwiki_review_index(3)
 
 return M
