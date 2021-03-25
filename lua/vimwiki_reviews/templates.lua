@@ -13,7 +13,7 @@ function M.for_vimwiki(vimwiki_index)
 end
 
 -- Returns an object with template functions matching passed syntax
-function M.for_syntax(vimwiki_syntax) 
+function M.for_syntax(syntax) 
 	local syntaxed = {}
 
 	-- Returns string representing header of passed level in correct syntax

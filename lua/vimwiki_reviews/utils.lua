@@ -25,7 +25,7 @@ end
 
 -- Finds review template path for provided review type
 function M.get_review_template_path(vimwiki_index, review_type)
-	return get_review_filename(vimwiki_index, 'template-' .. review_type)
+	return M.get_review_filename(vimwiki_index, 'template-' .. review_type)
 end
 
 -- Reads template for provided review type into current buffer

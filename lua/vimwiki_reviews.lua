@@ -232,6 +232,4 @@ function M.open_vimwiki_review_index(vimwiki_index)
 	vim.api.nvim_buf_set_lines(buf, 0, 0, false, lines)  -- Put new contents
 end
 
-M.open_vimwiki_review_index(3)
-
 return M
