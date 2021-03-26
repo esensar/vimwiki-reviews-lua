@@ -7,9 +7,9 @@ Check out [VimL version](https://github.com/esensar/vimwiki-reviews) for Vim sup
 
 ## Requirements
 
- - [NeoVim](https://neovim.io) version 0.5.0+
- - [vimwiki plugin](https://github.com/vimwiki/vimwiki)
- - [plenary.nvim plugin](https://github.com/nvim-lua/plenary.nvim)
+- [NeoVim](https://neovim.io) version 0.5.0+
+- [vimwiki plugin](https://github.com/vimwiki/vimwiki)
+- [plenary.nvim plugin](https://github.com/nvim-lua/plenary.nvim)
 
 ## Installation
 

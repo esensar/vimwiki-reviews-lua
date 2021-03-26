@@ -227,7 +227,7 @@ where
 
 So, for example, to remap the |:VimwikiReviewIndex| mapping, you'd do something
 like: >
-        :nmap <Leader>wx <Plug>VimwikiIndex
+        :nmap <Leader>wx <Plug>VimwikiReviewIndex
 
 Note that the recursive version of "map" command is needed to expand the right
 hand side to retrieve the <Plug> definition. "noremap" will not work. <Plug> is
