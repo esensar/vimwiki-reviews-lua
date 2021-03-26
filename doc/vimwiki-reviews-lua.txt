@@ -223,7 +223,7 @@ no matter what filetype you have open.
 If a conflict exists between vimwiki-reviews-lua and pre-existing maps
 or if you wish to customize these default mappings, you can remap them with: >
 
-:nmap {map} <Plug>{command}
+  :nmap {map} <Plug>{command}
 
 where
 `{map}` is the new key sequence of your choosing
@@ -231,7 +231,8 @@ where
 
 So, for example, to remap the |:VimwikiReviewIndex| mapping, you'd do something
 like: >
-:nmap <Leader>wx <Plug>VimwikiReviewIndex
+
+  :nmap <Leader>wx <Plug>VimwikiReviewIndex
 
 Note that the recursive version of "map" command is needed to expand the right
 hand side to retrieve the <Plug> definition. "noremap" will not work. <Plug> is
