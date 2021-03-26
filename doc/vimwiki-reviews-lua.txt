@@ -429,23 +429,23 @@ vim.g.loaded_vimwiki_reviews = 1
 <
 In this case only |vimwiki-reviews-lua-functions| will be available.
 
-ISSUES																					    *vimwiki-reviews-lua-issues*
+ISSUES                                              *vimwiki-reviews-lua-issues*
 
 If you experience issues using vimwiki-reviews-lua, please report them at
 <https://github.com/esensar/vimwiki-reviews-lua/issues>.
 
-CONTRIBUTING																	*vimwiki-reviews-lua-contributing*
+CONTRIBUTING                                  *vimwiki-reviews-lua-contributing*
 
 Feel free to look at already reported issues at
 <https://github.com/esensar/vimwiki-reviews-lua/issues>.
 If available, check out CONTRIBUTING.md file in the repository.
 Feel free to create a new issue or pull request.
 
-VERSION																					   *vimwiki-reviews-lua-version*
+VERSION                                            *vimwiki-reviews-lua-version*
 
 Version 1.0.0
 
-LICENSE																					   *vimwiki-reviews-lua-license*
+LICENSE                                            *vimwiki-reviews-lua-license*
 
 MIT License
 
