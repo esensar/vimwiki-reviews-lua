@@ -19,8 +19,8 @@ Install using favourite plugin manager. This plugin depends on [plenary.nvim](ht
 
 ```
 use {
-	'esensar/vimwiki-reviews-lua',
-	requires = { 'vimwiki/vimwiki', 'nvim-lua/plenary.nvim' }
+  'esensar/vimwiki-reviews-lua',
+  requires = { 'vimwiki/vimwiki', 'nvim-lua/plenary.nvim' }
 }
 ```
 
