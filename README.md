@@ -33,6 +33,13 @@ Then install via `:PackerInstall` or `:PackerSync`
 
 2. Using [Plug](https://github.com/junegunn/vim-plug)
 
+```
+Plug 'vimwiki/vimwiki'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'esensar/vimwiki-reviews-lua'
+```
+Then install via `:PlugInstall`
+
 ## Usage
 
 Plugin is meant to integrate well with usual vimwiki commands and keymaps.
