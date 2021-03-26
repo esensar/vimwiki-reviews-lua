@@ -1,0 +1,469 @@
+*vimwiki-reviews-lua.txt* Periodical review extensions for vimwiki
+
+INTRODUCTION																		 *vimwiki-reviews-lua*
+
+Makes it easy to write periodical reviews inside vimwiki.
+
+CONTENTS																				 *vimwiki-reviews-lua-contents*
+
+	1.	Overview															 |vimwiki-reviews-lua-overview|
+	2.	Requirements													 |vimwiki-reviews-lua-requirements|
+	3.	Installation													 |vimwiki-reviews-lua-installation|
+	4.	Usage																	 |vimwiki-reviews-lua-usage|
+	5.	Commands															 |vimwiki-reviews-lua-commands|
+	6.	Functions															 |vimwiki-reviews-lua-functions|
+	7.	Mappings															 |vimwiki-reviews-lua-mappings|
+	8.	Plugs																	 |vimwiki-reviews-lua-plugs|
+	9.	Options																 |vimwiki-reviews-lua-options|
+	10. Issues																 |vimwiki-reviews-lua-issues|
+	11. Contributing													 |vimwiki-reviews-lua-contributing|
+	12. Version																 |vimwiki-reviews-lua-version|
+	13. License																 |vimwiki-reviews-lua-license|
+
+OVERVIEW																				 *vimwiki-reviews-lua-overview*
+
+Vimwiki reviews lua provides lua API and commands to more easily create
+periodical reviews inside vimwiki. It depends on vimwiki plugin and only adds
+reviews functionality to it, trying to follow vimwiki style.
+
+REQUIREMENTS																		 *vimwiki-reviews-lua-requirements*
+
+NeoVim version 0.5.0+
+VimWiki plugin (vimwiki/vimwiki)
+NeoVim plenary plugin (nvim-lua/plenary.nvim)
+
+INSTALLATION																		 *vimwiki-reviews-lua-installation*
+
+	1. Packer.nvim <https://github.com/wbthomason/packer.nvim>
+
+		 Add the following to your packer setup: >
+
+			 use {
+				'esensar/vimwiki-reviews-lua',
+				requires = { 'vimwiki/vimwiki', 'nvim-lua/plenary.nvim' }
+			 }
+<
+		 Or following if you already use these two plugins: >
+
+			 use 'esensar/vimwiki-reviews-lua'
+<
+		 Then install via `:PackerInstall`
+
+	2. Plug <https://github.com/junegunn/vim-plug>
+
+		 Add the following to your vimrc, or something sourced therein: >
+
+			 Plug 'vimwiki/vimwiki'
+			 Plug 'nvim-lua/plenary.nvim'
+			 Plug 'esensar/vimwiki-reviews-lua'
+<
+		 Then install via `:PlugInstall`
+
+	3. Manual
+
+		 Clone this repository and copy the files in plugin/, lua/, and doc/
+		 to their respective directories in your vimfiles, or copy the text from
+		 the github repository into new files in those directories. Make sure to
+		 run `:helptags`.
+
+USAGE																						*vimwiki-reviews-lua-usage*
+
+This should integrate rather well with the usual vimwiki commands and keymaps.
+It follows same pattern for commands and keymaps as vimwiki by default. It is
+possible to override these.
+
+By default, plugin stored reviews in `reviews` subdirectory inside vimwiki
+directory. It generates index named `reviews.ext` in that directory.
+
+COMMANDS																				 *vimwiki-reviews-lua-commands*
+
+*:VimwikiWeeklyReview* [count]
+	Open weekly review for current week for current vimwiki.
+	Plugin currently dates review to Sunday
+	and counts Sunday as the end of the week.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiNextWeeklyReview* [count]
+	Open weekly review for next week for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiPrevWeeklyReview* [count]
+	Open weekly review for previous week for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiWeeklyTemplate* [count]
+	Opens template file for weekly review for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiMonthlyReview* [count]
+	Open monthly review for current month for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiNextMonthlyReview* [count]
+	Open monthly review for next month for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiPrevMonthlyReview* [count]
+	Open monthly review for previous month for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiMonthlyTemplate* [count]
+	Opens template file for monthly review for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiYearlyReview* [count]
+	Open yearly review for current year for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiNextYearlyReview* [count]
+	Open yearly review for next year for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiPrevYearlyReview* [count]
+	Open yearly review for previous year for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiYearlyTemplate* [count]
+	Opens template file for yearly review for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+
+*:VimwikiReviewIndex* [count]
+	Opens review index file for for current vimwiki.
+	If a [count] is given the
+	corresponding wiki from |g:vimwiki_list| is opened instead.
+	Automatically generates index based on current reviews, similar to vimwiki
+	diary index.
+
+FUNCTIONS																				*vimwiki-reviews-lua-functions*
+
+This plugin provides lua module `vimwiki_reviews` which is used by all of the
+commands. All of the functions may be used manually or integrated in other
+functionalities. Please check out source code for more details. Besides
+providing API used by the plugin, there are additional modules inside used by
+the API module, which may be useful in other functionalities. One of these is
+`vimwiki_reviews.vimwiki_api`which provides utility functions for interacting
+with `vimwiki`.
+
+Functions used by commands are:
+
+*vimwiki_reviews.open_vimwiki_weekly_review(vimwiki_index,offset)*
+  Used by |:VimwikiWeeklyReview|, |:VimwikiNextWeeklyReview| and
+	|:VimwikiPrevWeeklyReview|. [vimwiki_index] is used to select vimwiki from
+	|g:vimwiki_list| and [offset] is used to select past or future reviews
+	(+1 = 1 week in future, -1 = 1 week in past).
+*vimwiki_reviews.open_vimwiki_monthly_review(vimwiki_index,offset)*
+  Used by |:VimwikiMonthlyReview|, |:VimwikiNextMonthlyReview| and
+	|:VimwikiPrevMonthlyReview|. [vimwiki_index] is used to select vimwiki from
+	|g:vimwiki_list| and [offset] is used to select past or future reviews
+	(+1 = 1 month in future, -1 = 1 month in past).
+*vimwiki_reviews.open_vimwiki_yearly_review(vimwiki_index,offset)*
+  Used by |:VimwikiYearlyReview|, |:VimwikiNextYearlyReview| and
+	|:VimwikiPrevYearlyReview|. [vimwiki_index] is used to select vimwiki from
+	|g:vimwiki_list| and [offset] is used to select past or future reviews
+	(+1 = 1 year in future, -1 = 1 year in past).
+*vimwiki_reviews.open_vimwiki_review_index(vimwiki_index)*
+  Used by |:VimwikiReviewIndex|. Opens vimwiki reviews index file and
+	automatically generates its content based on reviews found in vimwiki.
+	[vimwiki_index] is used to select vimwiki from |g:vimwiki_list|.
+	Uses |vimwiki_reviews.get_review_index(vimwiki_index)|internally.
+*vimwiki_reviews.get_review_index(vimwiki_index)*
+  Geneartes vimwiki reviews index, which is used to generate index file when
+	opened by |vimwiki_reviews.open_vimwiki_review_index(vimwiki_index)|.
+	Returns table in format: >
+
+			index = {
+				["2020"] = {
+					months = {
+						["12"] = {
+							month = "2020-12-month.md",
+							weeks = {}
+						}
+					},
+					year = "2020-year.md"
+				},
+				["2021"] = {
+					months = {
+						["01"] = {
+							month = "2021-01-month.md",
+							weeks = {
+								["03"] = "2021-01-03-week.md",
+								["10"] = "2021-01-10-week.md",
+								["17"] = "2021-01-17-week.md",
+								["24"] = "2021-01-24-week.md",
+								["31"] = "2021-01-31-week.md"
+							}
+						}
+					}
+				}
+			}
+
+
+MAPPINGS																				 *vimwiki-reviews-lua-mappings*
+
+Below is a list of all default key mappings provided by
+vimwiki-reviews-lua. As global settings, they work in all vim sessions
+no matter what filetype you have open.
+
+If a conflict exists between vimwiki-reviews-lua and pre-existing maps
+or if you wish to customize these default mappings, you can remap them with: >
+
+         :nmap {map} <Plug>{command}
+
+where
+        `{map}` is the new key sequence of your choosing
+        `{command}` is the vimwiki-reviews-lua command you are remapping
+
+So, for example, to remap the |:VimwikiReviewIndex| mapping, you'd do something
+like: >
+        :nmap <Leader>wx <Plug>VimwikiIndex
+
+Note that the recursive version of "map" command is needed to expand the right
+hand side to retrieve the <Plug> definition. "noremap" will not work. <Plug> is
+required and considered to be part of the command.
+
+To disable default mappings, set |g:vimwiki_reviews_disable_maps| to 1: >
+
+				let g:vimwiki_reviews_disable_maps = 1
+
+Or in lua config: >
+
+				vim.g.vimwiki_reviews_disable_maps = 1
+
+<
+                                                 *vimwiki-reviews-lua-<Leader>wrww*
+[count]<Leader>wrww
+
+	Remap command: |<Plug>VimwikiWeeklyReview|
+	See also: |:VimwikiWeeklyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrwn*
+[count]<Leader>wrwn
+
+	Remap command: |<Plug>VimwikiNextWeeklyReview|
+	See also: |:VimwikiNextWeeklyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrwp*
+[count]<Leader>wrwp
+
+	Remap command: |<Plug>VimwikiPrevWeeklyReview|
+	See also: |:VimwikiPrevWeeklyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrtw*
+[count]<Leader>wrtw
+
+	Remap command: |<Plug>VimwikiWeeklyTemplate|
+	See also: |:VimwikiWeeklyTemplate|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrmm*
+[count]<Leader>wrmm
+
+	Remap command: |<Plug>VimwikiMonthlyReview|
+	See also: |:VimwikiMonthlyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrmn*
+[count]<Leader>wrmn
+
+	Remap command: |<Plug>VimwikiNextMonthlyReview|
+	See also: |:VimwikiNextMonthlyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrmp*
+[count]<Leader>wrmp
+
+	Remap command: |<Plug>VimwikiPrevMonthlyReview|
+	See also: |:VimwikiPrevMonthlyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrtm*
+[count]<Leader>wrtm
+
+	Remap command: |<Plug>VimwikiMonthlyTemplate|
+	See also: |:VimwikiMonthlyTemplate|
+
+                                                 *vimwiki-reviews-lua-<Leader>wryy*
+[count]<Leader>wryy
+
+	Remap command: |<Plug>VimwikiYearlyReview|
+	See also: |:VimwikiYearlyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wryn*
+[count]<Leader>wryn
+
+	Remap command: |<Plug>VimwikiNextYearlyReview|
+	See also: |:VimwikiNextYearlyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wryp*
+[count]<Leader>wryp
+
+	Remap command: |<Plug>VimwikiPrevYearlyReview|
+	See also: |:VimwikiPrevYearlyReview|
+
+                                                 *vimwiki-reviews-lua-<Leader>wrty*
+[count]<Leader>wrty
+
+	Remap command: |<Plug>VimwikiYearlyTemplate|
+	See also: |:VimwikiYearlyTemplate|
+
+                                                 *vimwiki-reviews-lua-<Leader>wri*
+[count]<Leader>wri
+
+	Remap command: |<Plug>VimwikiReviewIndex|
+	See also: |:VimwikiReviewIndex|
+
+PLUGS																						*vimwiki-reviews-lua-plugs*
+
+Below is a list of all <Plug> mappings provided by the plugin. To see how to
+use them, check out |vimwiki-reviews-lua-mappings|. Names of these mappings
+match functions listed in |vimwiki-reviews-lua-functions|. If <Plug> is
+prefixed with [count] it just means that mapping will take |v:count| into
+account. Using that <Plug> is the same as any other <Plug>.
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiWeeklyReview*
+[count]<Plug>VimwikiWeeklyReview
+
+	Invokes command: |:VimwikiWeeklyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiNextWeeklyReview*
+[count]<Plug>VimwikiNextWeeklyReview
+
+	Invokes command: |:VimwikiNextWeeklyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiPrevWeeklyReview*
+[count]<Plug>VimwikiPrevWeeklyReview
+
+	Invokes command: |:VimwikiPrevWeeklyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiWeeklyTemplate*
+[count]<Plug>VimwikiWeeklyTemplate
+
+	Invokes command: |:VimwikiWeeklyTemplate|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiMonthlyReview*
+[count]<Plug>VimwikiMonthlyReview
+
+	Invokes command: |:VimwikiMonthlyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiNextMonthlyReview*
+[count]<Plug>VimwikiNextMonthlyReview
+
+	Invokes command: |:VimwikiNextMonthlyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiPrevMonthlyReview*
+[count]<Plug>VimwikiPrevMonthlyReview
+
+	Invokes command: |:VimwikiPrevMonthlyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiMonthlyTemplate*
+[count]<Plug>VimwikiMonthlyTemplate
+
+	Invokes command: |:VimwikiMonthlyTemplate|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiYearlyReview*
+[count]<Plug>VimwikiYearlyReview
+
+	Invokes command: |:VimwikiYearlyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiNextYearlyReview*
+[count]<Plug>VimwikiNextYearlyReview
+
+	Invokes command: |:VimwikiNextYearlyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiPrevYearlyReview*
+[count]<Plug>VimwikiPrevYearlyReview
+
+	Invokes command: |:VimwikiPrevYearlyReview|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiYearlyTemplate*
+[count]<Plug>VimwikiYearlyTemplate
+
+	Invokes command: |:VimwikiYearlyTemplate|
+
+                                                 *vimwiki-reviews-lua-<Plug>VimwikiReviewIndex*
+[count]<Plug>VimwikiReviewIndex
+
+	Invokes command: |:VimwikiReviewIndex|
+
+OPTIONS																					*vimwiki-reviews-lua-options*
+
+Below is a list of all options provided by this plugin.
+
+                                                 *vimwiki-reviews-lua-g:vimwiki_reviews_disable_maps*
+
+It is possible to completely disable mappings provided by this plugin. It can
+be achieved by setting this option: >
+
+				let g:vimwiki_reviews_disable_maps = 1
+
+Or in lua config: >
+
+				vim.g.vimwiki_reviews_disable_maps = 1
+<
+In this case only |vimwiki-reviews-lua-commands| will be available. To make
+use of mappings, configure custom mapings by using provided
+|vimwiki-reviews-lua-plugs|.
+
+                                                 *vimwiki-reviews-lua-g:loaded_vimwiki_reviews
+
+It is possible to completely all commands, mappings  and plugs
+provided by this plugin. It can be achieved by setting this option: >
+
+				let g:loaded_vimwiki_reviews = 1
+
+Or in lua config: >
+
+				vim.g.loaded_vimwiki_reviews = 1
+<
+In this case only |vimwiki-reviews-lua-functions| will be available.
+
+ISSUES																					 *vimwiki-reviews-lua-issues*
+
+If you experience issues using vimwiki-reviews-lua, please report them at
+<https://github.com/esensar/vimwiki-reviews-lua/issues>.
+
+CONTRIBUTING																		 *vimwiki-reviews-lua-contributing*
+
+Feel free to look at already reported issues at
+<https://github.com/esensar/vimwiki-reviews-lua/issues>.
+If available, check out CONTRIBUTING.md file in the repository.
+Feel free to create a new issue or pull request.
+
+VERSION																					*vimwiki-reviews-lua-version*
+
+Version 1.0.0
+
+LICENSE																					*vimwiki-reviews-lua-license*
+
+MIT License
+
+Copyright (c) 2021 Ensar Sarajčić
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+vim:tw=78:ts=2:ft=help:norl:

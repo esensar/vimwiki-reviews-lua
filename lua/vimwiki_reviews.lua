@@ -54,7 +54,7 @@ function M.open_vimwiki_monthly_review(vimwiki_index, offset)
   local month = tonumber(os.date('%m', time))
 
   local month_time = os.time {
-    year = year,  
+    year = year,
     -- os.time automatically handles overflows
     month = month + offset,
     day = tonumber(os.date('%d', time))
@@ -85,7 +85,7 @@ function M.open_vimwiki_yearly_review(vimwiki_index, offset)
 end
 
 -- Generates review index table
--- Takes arguments similar to all vimwiki calls 
+-- Takes arguments similar to all vimwiki calls
 -- (no args, or 1 arg representing vimwiki index)
 function M.get_review_index(vimwiki_index)
   local reviews_dir = utils.get_reviews_dir(vimwiki_index)
