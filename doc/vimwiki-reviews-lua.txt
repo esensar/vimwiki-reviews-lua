@@ -6,19 +6,19 @@ Makes it easy to write periodical reviews inside vimwiki.
 
 CONTENTS                                          *vimwiki-reviews-lua-contents*
 
-1.  Overview															    |vimwiki-reviews-lua-overview|
-2.  Requirements													    |vimwiki-reviews-lua-requirements|
-3.  Installation													    |vimwiki-reviews-lua-installation|
-4.  Usage																	    |vimwiki-reviews-lua-usage|
-5.  Commands															    |vimwiki-reviews-lua-commands|
-6.  Functions															    |vimwiki-reviews-lua-functions|
-7.  Mappings															    |vimwiki-reviews-lua-mappings|
-8.  Plugs																	    |vimwiki-reviews-lua-plugs|
-9.  Options																    |vimwiki-reviews-lua-options|
-10. Issues																    |vimwiki-reviews-lua-issues|
-11. Contributing													    |vimwiki-reviews-lua-contributing|
-12. Version																    |vimwiki-reviews-lua-version|
-13. License																    |vimwiki-reviews-lua-license|
+1.  Overview                                  |vimwiki-reviews-lua-overview|
+2.  Requirements                              |vimwiki-reviews-lua-requirements|
+3.  Installation                              |vimwiki-reviews-lua-installation|
+4.  Usage                                     |vimwiki-reviews-lua-usage|
+5.  Commands                                  |vimwiki-reviews-lua-commands|
+6.  Functions                                 |vimwiki-reviews-lua-functions|
+7.  Mappings                                  |vimwiki-reviews-lua-mappings|
+8.  Plugs                                     |vimwiki-reviews-lua-plugs|
+9.  Options                                   |vimwiki-reviews-lua-options|
+10. Issues                                    |vimwiki-reviews-lua-issues|
+11. Contributing                              |vimwiki-reviews-lua-contributing|
+12. Version                                   |vimwiki-reviews-lua-version|
+13. License                                   |vimwiki-reviews-lua-license|
 
 OVERVIEW                                          *vimwiki-reviews-lua-overview*
 
