@@ -226,8 +226,8 @@ or if you wish to customize these default mappings, you can remap them with: >
   :nmap {map} <Plug>{command}
 
 where
-`{map}` is the new key sequence of your choosing
-`{command}` is the vimwiki-reviews-lua command you are remapping
+  `{map}` is the new key sequence of your choosing
+  `{command}` is the vimwiki-reviews-lua command you are remapping
 
 So, for example, to remap the |:VimwikiReviewIndex| mapping, you'd do something
 like: >
