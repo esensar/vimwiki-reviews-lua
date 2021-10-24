@@ -166,7 +166,6 @@ function M.open_vimwiki_review_index(vimwiki_index)
 
   local lines = {
     builder.header(1, 'Reviews'),
-    '',
   }
 
   -- Sort index by year
@@ -182,12 +181,12 @@ function M.open_vimwiki_review_index(vimwiki_index)
 
   -- Add years
   for _, year in pairs(years) do
-    table.insert(lines, builder.header(2, year))
     table.insert(lines, '')
+    table.insert(lines, builder.header(2, year))
     if (index[year].year)
     then
-      table.insert(lines, builder.list_item(builder.link(index[year].year, 'Yearly review')))
       table.insert(lines, '')
+      table.insert(lines, builder.list_item(builder.link(index[year].year, 'Yearly review')))
     end
 
     -- Sort months
@@ -203,6 +202,7 @@ function M.open_vimwiki_review_index(vimwiki_index)
         day = 1
       }
       local month_name = os.date('%B', month_time)
+      table.insert(lines, '')
       table.insert(lines, builder.header(3, month_name))
       table.insert(lines, '')
       if (index[year].months[month].month)
@@ -222,14 +222,12 @@ function M.open_vimwiki_review_index(vimwiki_index)
         table.insert(lines, builder.list_item(builder.link(weeks[week], 'Week #' .. count .. ' Review')))
         count = count - 1
       end
-
-      table.insert(lines, '')
     end
   end
 
   local buf = vim.api.nvim_get_current_buf()
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, {})  -- Clear out
-  vim.api.nvim_buf_set_lines(buf, 0, 0, false, lines)  -- Put new contents
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)  -- Put new contents
 end
 
 return M

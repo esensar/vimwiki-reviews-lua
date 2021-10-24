@@ -3,8 +3,6 @@
 Simple extension for [vimwiki](https://github.com/vimwiki/vimwiki) enabling weekly, monthly and yearly reviews.
 Check out [VimL version](https://github.com/esensar/vimwiki-reviews) for Vim support.
 
-**WORK IN PROGRESS!**
-
 ## Requirements
 
 - [NeoVim](https://neovim.io) version 0.5.0+
