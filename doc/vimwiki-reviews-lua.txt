@@ -433,12 +433,12 @@ In this case only |vimwiki-reviews-lua-functions| will be available.
 ISSUES                                              *vimwiki-reviews-lua-issues*
 
 If you experience issues using vimwiki-reviews-lua, please report them at
-<https://github.com/esensar/vimwiki-reviews-lua/issues>.
+<https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua/issues>.
 
 CONTRIBUTING                                  *vimwiki-reviews-lua-contributing*
 
 Feel free to look at already reported issues at
-<https://github.com/esensar/vimwiki-reviews-lua/issues>.
+<https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua/issues>.
 If available, check out CONTRIBUTING.md file in the repository.
 Feel free to create a new issue or pull request.
 

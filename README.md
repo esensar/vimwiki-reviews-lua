@@ -1,7 +1,7 @@
 # Vimwiki reviews
 
 Simple extension for [vimwiki](https://github.com/vimwiki/vimwiki) enabling weekly, monthly and yearly reviews.
-Check out [VimL version](https://github.com/esensar/vimwiki-reviews) for Vim support.
+Check out [VimL version](https://codeberg.org/vimwiki-reviews/vimwiki-reviews) for Vim support.
 
 ## Requirements
 
