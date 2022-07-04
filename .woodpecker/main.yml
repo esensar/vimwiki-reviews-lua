@@ -1,0 +1,11 @@
+pipeline:
+  stylua:
+    image: fnichol/stylua
+    commands:
+      - stylua --check .
+  luacheck:
+    image: pipelinecomponents/luacheck
+    commands:
+      - luacheck .
+
+branches: main
