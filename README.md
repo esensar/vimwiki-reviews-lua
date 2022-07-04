@@ -17,14 +17,14 @@ Install using favourite plugin manager. This plugin depends on [plenary.nvim](ht
 
 ```
 use {
-  'esensar/vimwiki-reviews-lua',
+  'https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua.git',
   requires = { 'vimwiki/vimwiki', 'nvim-lua/plenary.nvim' }
 }
 ```
 
 or if `vimwiki` and `plenary` are already listed:
 ```
-use 'esensar/vimwiki-reviews-lua'
+use 'https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua.git'
 ```
 
 Then install via `:PackerInstall` or `:PackerSync`
@@ -34,7 +34,7 @@ Then install via `:PackerInstall` or `:PackerSync`
 ```
 Plug 'vimwiki/vimwiki'
 Plug 'nvim-lua/plenary.nvim'
-Plug 'esensar/vimwiki-reviews-lua'
+Plug 'https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua.git'
 ```
 Then install via `:PlugInstall`
 

@@ -39,13 +39,13 @@ INSTALLATION                                  *vimwiki-reviews-lua-installation*
 Add the following to your packer setup: >
 
   use {
-    'esensar/vimwiki-reviews-lua',
+    'https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua.git',
       requires = { 'vimwiki/vimwiki', 'nvim-lua/plenary.nvim' }
   }
 <
 Or following if you already use these two plugins: >
 
-  use 'esensar/vimwiki-reviews-lua'
+  use 'https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua.git'
 <
 Then install via `:PackerInstall`
 
@@ -55,7 +55,7 @@ Add the following to your vimrc, or something sourced therein: >
 
   Plug 'vimwiki/vimwiki'
   Plug 'nvim-lua/plenary.nvim'
-  Plug 'esensar/vimwiki-reviews-lua'
+  Plug 'https://codeberg.org/vimwiki-reviews/vimwiki-reviews-lua.git'
 <
 Then install via `:PlugInstall`
 
